@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import Localbase from 'localbase'
 
 export default {
   name: 'App',
@@ -14,5 +15,8 @@ export default {
   data: () => ({
     //
   }),
+  mounted(){
+    let db = new Localbase(process.env.VUE_APP_DB_NAME)
+  }
 };
 </script>

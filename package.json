@@ -2,6 +2,8 @@
   "name": "vuelec",
   "version": "0.1.0",
   "private": true,
+  "author": "Ayrat Asfandiyarov",
+  "description": "Created specifically for friends",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -15,6 +17,7 @@
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "electron-builder": "^23.0.3",
+    "localbase": "^0.7.5",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vuetify": "^2.6.0",

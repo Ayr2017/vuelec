@@ -1,53 +1,52 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <router-link to="/">На главную</router-link>
-  </div>
+  <v-container fluid>
+
+    <v-row >
+      <v-col class="d-flex justify-center mb-6" fluid>
+        <v-btn color="purple darken-4" class="white--text" @click="openIDB">ADD USER</v-btn>
+        <v-btn color="purple lighten-4" class="black--text" @click="createIDBTable">SHOW USERS</v-btn>
+       
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+         <ul>           
+          <li v-for="user in users" :key="user.age">{{user.age}}</li>
+        </ul>
+      </v-col>
+    </v-row>
+    
+
+  </v-container>
 </template>
 
 <script>
-
+import Localbase from 'localbase'
+import conf from '@/api/indexeddb'
 export default {
-  data: () => ({}),
+  data: () => ({
+    users: []
+  }),
   mounted(){
-    const IDB = window.indexedDB;
-    // This is what our customer data looks like.
-  const customerData = [
-    { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
-    { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" }
-  ];
-  const dbName = "the_name_2";
-
-  var request = indexedDB.open(dbName, 2);
-
-  request.onerror = function(event) {
-    // Handle errors.
-  };
-  request.onupgradeneeded = function(event) {
-    var db = event.target.result;
-
-    // Create an objectStore to hold information about our customers. We're
-    // going to use "ssn" as our key path because it's guaranteed to be
-    // unique.
-    var objectStore = db.createObjectStore("customers", { keyPath: "ssn" });
-
-    // Create an index to search customers by name. We may have duplicates
-    // so we can't use a unique index.
-    objectStore.createIndex("name", "name", { unique: false });
-
-    // Create an index to search customers by email. We want to ensure that
-    // no two customers have the same email, so use a unique index.
-    objectStore.createIndex("email", "email", { unique: true });
-
-    // Store values in the newly created objectStore.
-    for (var i in customerData) {
-      objectStore.add(customerData[i]);
-    }
-
-    console.log(objectStore)
-};
    
   },
+  methods: {
+     openIDB(){
+       let db = new Localbase(conf.dbName)
+
+       db.collection('users').add({
+        id: 1,
+        name: 'Bill',
+        age: Math.floor(Math.random() * 100),
+      })
+    },
+     createIDBTable(){
+       let db = new Localbase(process.env.VUE_APP_DB_NAME)
+       db.collection('users').get().then(users => {
+        this.users = users;
+      })
+    }
+  }
 }
 </script>
 

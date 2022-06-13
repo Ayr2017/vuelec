@@ -1,14 +1,14 @@
 <template>
-  <v-container>
+  <v-container fluid>
 
-    <v-row>
+    <v-row >
       <v-col class="d-flex justify-center mb-6" fluid>
-        
-        <card-component></card-component>
+        <login-dialog v-if="dialogIsOpened"></login-dialog>
+        <card-component v-else></card-component>
         
       </v-col>
     </v-row>
-    <login-dialog v-if="dialogIsOpened"></login-dialog>
+    
 
   </v-container>
 </template>
@@ -16,6 +16,7 @@
 <script>
 import LoginDialog from '@/components/start/LoginDialog.vue'
 import CardComponent from '@/components/start/CardComponent.vue'
+import {mapGetters} from 'vuex'
 
   export default {
     name: 'StartView',
@@ -35,9 +36,10 @@ import CardComponent from '@/components/start/CardComponent.vue'
       testString(){
         return this.$store.getters.test;
       },
-      dialogIsOpened() {
-        return this.$store.getters.dialogIsOpened;
-      }
+      ...mapGetters(['dialogIsOpened']),
+      // dialogIsOpened() {
+      //   return this.$store.getters.dialogIsOpened;
+      // }
     }
   }
 </script>
