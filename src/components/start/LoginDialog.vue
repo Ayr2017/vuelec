@@ -2,7 +2,7 @@
 
       <v-card>
         <v-card-title>
-          <span class="text-h5">Вход в систему</span>
+          <span class="text-h5">Вход в систему </span>
         </v-card-title>
         <v-card-text>
           <v-container>
