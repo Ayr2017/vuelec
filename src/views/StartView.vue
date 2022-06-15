@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-
     <v-row >
       <v-col class="d-flex justify-center mb-6" fluid>
         <login-dialog v-if="dialogIsOpened"></login-dialog>
@@ -40,6 +39,9 @@ import {mapGetters} from 'vuex'
       // dialogIsOpened() {
       //   return this.$store.getters.dialogIsOpened;
       // }
+    },
+    methods: {
+      
     }
   }
 </script>

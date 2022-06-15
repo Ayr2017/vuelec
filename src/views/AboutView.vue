@@ -28,7 +28,10 @@ export default {
     users: []
   }),
   mounted(){
-   
+    let db = new Localbase(conf.dbName)
+       db.collection('users').get().then(users => {
+        this.users = users;
+      })
   },
   methods: {
      openIDB(){
@@ -41,7 +44,7 @@ export default {
       })
     },
      createIDBTable(){
-       let db = new Localbase(process.env.VUE_APP_DB_NAME)
+       let db = new Localbase(conf.dbName)
        db.collection('users').get().then(users => {
         this.users = users;
       })

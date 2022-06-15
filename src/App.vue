@@ -1,5 +1,6 @@
 <template>
   <v-app>
+   <header-component></header-component>
     <v-main>
       <router-view/>
     </v-main>
@@ -8,10 +9,12 @@
 
 <script>
 import Localbase from 'localbase'
-
+import HeaderComponent from '@/components/app/HeaderComponent.vue'
 export default {
   name: 'App',
-
+  components: {
+    HeaderComponent
+  },
   data: () => ({
     //
   }),
